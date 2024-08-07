@@ -1,0 +1,24 @@
+syntaxe = "proto3";
+
+package notification;
+
+message Notification {
+    string id = 1;
+    string title = 2;
+    string message = 3;
+    string user_id = 4;
+    int64 timestamp = 5;
+}
+
+message NotificationRequest {
+    string user_id = 1;
+}
+
+message NotificationResponse {
+    repeated Notification notifications = 1;
+}
+
+service NotificationService {
+    rpc GetNotifications(NotificationRequest) returns (NotificationResponse);
+    rpc StreamNotifications(NotificationRequest) returns (stream Notification);
+}
