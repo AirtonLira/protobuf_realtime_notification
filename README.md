@@ -5,20 +5,20 @@ Este projeto demonstra a implementação de um serviço de notificações em tem
 ## Estrutura do Projeto
 
 protobuf_realtime_notification/
-├── cmd/
-│ ├── grpc/
-│ │ └── main.go
-│ ├── client/
-│ │ └── main.go
-├── internal/
-│ └── proto/
-│ └── notification/
-│ ├── notification.proto
-│ ├── notification.pb.go
-│ └── notification_grpc.pb.go
-├── go.mod
-├── go.sum
-└── README.md
+- cmd/
+  - grpc/
+    - main.go
+  - client/
+    - main.go
+- internal/
+  - proto/
+    - notification/
+      - notification.proto
+      - notification.pb.go
+      - notification_grpc.pb.go
+- go.mod
+- go.sum
+- README.md
 
 
 ## Requisitos
