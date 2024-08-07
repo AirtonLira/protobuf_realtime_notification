@@ -1,4 +1,4 @@
-syntaxe = "proto3";
+syntax = "proto3";
 
 package notification;
 

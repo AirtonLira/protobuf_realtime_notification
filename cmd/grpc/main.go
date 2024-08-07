@@ -7,7 +7,6 @@ import (
 	"time"
 
 	pb "github.com/AirtonLira/protobuf_realtime_notification/internal/proto/notification"
-
 	"google.golang.org/grpc"
 )
 
@@ -28,7 +27,7 @@ func (s *server) StreamNotifications(req *pb.NotificationRequest, stream pb.Noti
 		if err := stream.Send(notification); err != nil {
 			return err
 		}
-		time.Sleep(10 * time.Second) // Simulate new notifications arriving
+		time.Sleep(10 * time.Second)
 	}
 }
 

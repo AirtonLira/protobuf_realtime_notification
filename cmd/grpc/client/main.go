@@ -1,0 +1,57 @@
+package main
+
+import (
+	"context"
+	"log"
+	"time"
+
+	pb "github.com/AirtonLira/protobuf_realtime_notification/internal/proto/notification"
+	"google.golang.org/grpc"
+)
+
+func main() {
+	conn, err := grpc.Dial(":50051", grpc.WithInsecure(), grpc.WithBlock())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer conn.Close()
+
+	client := pb.NewNotificationServiceClient(conn)
+
+	// Test GetNotifications
+	testGetNotifications(client)
+
+	// Test StreamNotifications
+	testStreamNotifications(client)
+}
+
+func testGetNotifications(client pb.NotificationServiceClient) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+	req := &pb.NotificationRequest{UserId: "user123"}
+	res, err := client.GetNotifications(ctx, req)
+	if err != nil {
+		log.Fatalf("could not get notifications: %v", err)
+	}
+	log.Printf("GetNotifications Response: %v", res.Notifications)
+}
+
+func testStreamNotifications(client pb.NotificationServiceClient) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+
+	req := &pb.NotificationRequest{UserId: "user123"}
+	stream, err := client.StreamNotifications(ctx, req)
+	if err != nil {
+		log.Fatalf("could not stream notifications: %v", err)
+	}
+
+	for {
+		notification, err := stream.Recv()
+		if err != nil {
+			log.Fatalf("error receiving notification: %v", err)
+		}
+		log.Printf("StreamNotifications Response: %v", notification)
+	}
+}
