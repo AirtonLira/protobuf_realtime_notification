@@ -4,7 +4,7 @@ Este projeto demonstra a implementação de um serviço de notificações em tem
 
 ## Estrutura do Projeto
 
-protobuf_realtime_notification/
+- protobuf_realtime_notification/
 - cmd/
   - grpc/
     - main.go
