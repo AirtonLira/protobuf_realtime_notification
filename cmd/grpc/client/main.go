@@ -31,9 +31,13 @@ func testGetNotifications(client pb.NotificationServiceClient) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	if err := duckdb.InitDB(); err != nil {
+	db, err := duckdb.InitDB()
+
+	if err != nil {
 		log.Fatalf("failed to load duckdb: %v ", err)
 	}
+
+	defer db.Close()
 
 	req := &pb.NotificationRequest{UserId: "user123"}
 	res, err := client.GetNotifications(ctx, req)
