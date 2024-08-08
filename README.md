@@ -1,6 +1,6 @@
 # Protobuf Realtime Notification
 
-Este projeto demonstra a implementação de um serviço de notificações em tempo real utilizando Protocol Buffers (Protobuf) e gRPC com Golang.
+Este projeto demonstra a implementação de um serviço de notificações em tempo real utilizando Protocol Buffers (Protobuf) e gRPC com Golang, com troca de mensagem em streaming.
 
 ## Estrutura do Projeto
 
@@ -28,6 +28,12 @@ Este projeto demonstra a implementação de um serviço de notificações em tem
 - Plugins do Protobuf para Go:
   - `protoc-gen-go`
   - `protoc-gen-go-grpc`
+
+## Próximas Features
+
+- 🚀 DuckDB: Adicionaremos o suporte ao DuckDB para obter novos eventos a serem notificados. Imagine uma avalanche de notificações super rápidas e precisas! 📈
+
+- ⏰ Apache Airflow: Vamos integrar o Apache Airflow para agendar notificações em batch retroativas. Sim, você poderá enviar aquelas notificações que esqueceu, como se fossem novinhas em folha! 📅
 
 ## Instalação
 
