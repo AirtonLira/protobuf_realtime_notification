@@ -6,6 +6,7 @@ import (
 	"time"
 
 	pb "github.com/AirtonLira/protobuf_realtime_notification/internal/proto/notification"
+	"github.com/AirtonLira/protobuf_realtime_notification/pkg/duckdb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -30,12 +31,17 @@ func testGetNotifications(client pb.NotificationServiceClient) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
+	if err := duckdb.InitDB(); err != nil {
+		log.Fatalf("failed to load duckdb: %v ", err)
+	}
+
 	req := &pb.NotificationRequest{UserId: "user123"}
 	res, err := client.GetNotifications(ctx, req)
 	if err != nil {
 		log.Fatalf("could not get notifications: %v", err)
 	}
 	log.Printf("GetNotifications Response: %v", res.Notifications)
+
 }
 
 // func testStreamNotifications(client pb.NotificationServiceClient) {

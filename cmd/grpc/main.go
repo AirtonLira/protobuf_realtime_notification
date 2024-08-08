@@ -7,6 +7,7 @@ import (
 	"time"
 
 	pb "github.com/AirtonLira/protobuf_realtime_notification/internal/proto/notification"
+	"github.com/AirtonLira/protobuf_realtime_notification/pkg/duckdb"
 	"google.golang.org/grpc"
 )
 
@@ -41,4 +42,14 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+
+	db, err := duckdb.InitDB()
+
+	if err != nil {
+		log.Fatalf("failed to load duckdb: %v ", err)
+		defer db.Close()
+	}
+
+	db.Close()
+
 }
